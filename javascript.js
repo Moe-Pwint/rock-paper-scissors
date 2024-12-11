@@ -14,6 +14,20 @@ return answer;
 console.log(getComputerChoice());
 
 
+function getHumanChoice() {
+  let humanPrompt = prompt("Please type 'rock' or 'paper' or 'scissors':");
+  answerHuman = humanPrompt.toLowerCase();
+
+  if (answerHuman != ('rock' || 'paper' || 'scissors')) {
+    alert("Please check typos!");
+    getHumanChoice();
+  }
+  else {return answerHuman;
+  }
+  return answerHuman;
+}
+console.log(getHumanChoice());
+
 /*
 
 
