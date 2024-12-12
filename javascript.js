@@ -18,11 +18,9 @@ function getHumanChoice() {
   return humanPrompt;
 }
 
-let humanScore = 0;
-let computerScore = 0;
 
 function playRound(humanChoice, computerChoice) {
-  let human = humanChoice;
+  let human = humanChoice.toLowerCase();
   let computer = computerChoice;
 
   console.log(computerChoice);
@@ -67,12 +65,20 @@ const computerSelection = getComputerChoice();
 
 playRound(humanSelection, computerSelection);
 
+function playGame(){
+  let humanScore = 0;
+  let computerScore = 0;
+  
+
+
+
+}
 
 
 /*
 Step 5: Write the logic to play a single round
 Your game will be played round by round. 
-     - Create a new function named playRound.
+     + Create a new function named playRound.
 You will write a function that takes the human and computer player choices as arguments, 
      + Define two parameters for playRound: humanChoice and computerChoice.
      + Use these two parameters to take the human and computer choices as arguments.
@@ -80,8 +86,8 @@ plays a single round,
 increments the round winner’s score 
      - Increment the humanScore or computerScore variable based on the round winner.
 and logs a winner announcement.
-     - Write the code for your playRound function to console.log a string value representing the round winner,
-     - such as: “You lose! Paper beats Rock”.
+     + Write the code for your playRound function to console.log a string value representing the round winner,
+     + such as: “You lose! Paper beats Rock”.
 
  
  
