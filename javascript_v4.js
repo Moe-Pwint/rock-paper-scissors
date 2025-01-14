@@ -12,7 +12,25 @@ function getComputerChoice() {
 
 
 function getHumanChoice() {
-let humanPrompt = prompt("Please type 'rock' or 'paper' or 'scissors':");
+//let humanPrompt = prompt("Please type 'rock' or 'paper' or 'scissors':");//
+let humanPrompt;
+const allBtns = document.querySelector('#buttonCollection');
+const rBtn = document.querySelector('#rockBtn');
+const pBtn = document.querySelector('#paperBtn');
+const sBtn = document.querySelector('#scissorsBtn');
+
+switch (allBtns) {
+    case rBtn: 
+        humanPrompt = 'rock';
+        break;
+    case pBtn:
+        humanPrompt = 'paper';
+        break;
+    case sBtn:
+        humanPrompt = 'scissors';
+        break;
+
+    }
 return humanPrompt;
 }
 
@@ -61,11 +79,13 @@ function playRound() {
     }
 }
 
-function playGame() {
-    for (let i = 0; i < 5; i++) {
-    console.log(playRound());
-    }
-    console.log(alert(`Computer score is ${computerScore} and your score is ${humanScore}.`));
-}
 
-console.log(playGame());
+
+/*
+Create three buttons, one for each selection. 
+Add an event listener to the buttons that call your playRound function with the correct playerSelection every time a button is clicked. 
+(you can keep the console.logs for this step)
+Add a div for displaying results and change all of your console.logs into DOM methods.
+*/
+
+console.log(playRound());
