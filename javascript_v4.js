@@ -1,3 +1,10 @@
+//humanWin & computerWin check if their score = true or false in the current round//
+let humanWin;
+let computerWin;
+
+//These counters will keep counts of scores for each round.//
+var cScoreCounter = 0;
+var hScoreCounter = 0;
 
 //playStart is selected to be used to start the game.
 const playStart = document.querySelector('#playStart');
@@ -28,13 +35,6 @@ dHScore.appendChild(hScore);
 const announcement = document.querySelector('#announcement');
 const announce = document.createElement('p');
 
-//humanWin & computerWin check if their score = true or false in the current round//
-let humanWin;
-let computerWin;
-
-//These counters will keep counts of scores for each round.//
-var cScoreCounter = 0;
-var hScoreCounter = 0;
 
 function getComputerChoice() {  
     let computerNumber = Math.floor(Math.random()*3);
