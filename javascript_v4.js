@@ -22,13 +22,13 @@ sBtn.addEventListener('click',  () => playRound('scissors'));
 //cScore (computer's score) will be appended to dCScore, which will display the score after each round.//
 const dCScore = document.querySelector('#displayCompScore');
 const cScore = document.createElement('p');
-cScore.textContent = (`Computer's Score: ${cScoreCounter}`);
+cScore.innerHTML = (`Computer's Score: ${cScoreCounter}`);
 dCScore.appendChild(cScore);
 
 //hScore (human's score) will be appended to dHScore, which will display the score after each round.//
 const dHScore = document.querySelector('#displayHumanScore');
 const hScore = document.createElement('p');
-hScore.textContent = `Your Score: ${hScoreCounter}`;
+hScore.innerHTML = `Your Score: ${hScoreCounter}`;
 dHScore.appendChild(hScore);
 
 //announce will be appended to announcement, after every round, the announcement will be updated, including the final winner announcement.//
