@@ -1,3 +1,41 @@
+
+//playStart is selected to be used to start the game.
+const playStart = document.querySelector('#playStart');
+playStart.addEventListener('click', startPlay); 
+
+//Buttons to play the three options are selected//
+const rBtn = document.querySelector('#rockBtn');
+rBtn.addEventListener('click', () => playRound('rock'));
+const pBtn = document.querySelector('#paperBtn');
+pBtn.addEventListener('click',  () => playRound('paper'));
+const sBtn = document.querySelector('#scissorsBtn');
+sBtn.addEventListener('click',  () => playRound('scissors'));
+
+
+//cScore (computer's score) will be appended to dCScore, which will display the score after each round.//
+const dCScore = document.querySelector('#displayCompScore');
+const cScore = document.createElement('p');
+cScore.textContent = (`Computer's Score: ${cScoreCounter}`);
+dCScore.appendChild(cScore);
+
+//hScore (human's score) will be appended to dHScore, which will display the score after each round.//
+const dHScore = document.querySelector('#displayHumanScore');
+const hScore = document.createElement('p');
+hScore.textContent = `Your Score: ${hScoreCounter}`;
+dHScore.appendChild(hScore);
+
+//announce will be appended to announcement, after every round, the announcement will be updated, including the final winner announcement.//
+const announcement = document.querySelector('#announcement');
+const announce = document.createElement('p');
+
+//humanWin & computerWin check if their score = true or false in the current round//
+let humanWin;
+let computerWin;
+
+//These counters will keep counts of scores for each round.//
+var cScoreCounter = 0;
+var hScoreCounter = 0;
+
 function getComputerChoice() {  
     let computerNumber = Math.floor(Math.random()*3);
       if (computerNumber === 0) {
@@ -10,66 +48,35 @@ function getComputerChoice() {
   return answer;
   }
 
-//playStart is selected to be used to start the game.
-const playStart = document.querySelector('#playStart');
-//humanWin checks if the human scores in the current round//
-let humanWin;
-//computerWin checks if the computer scores in the current round//
-let computerWin;
-
-//The counter will increment 1 after each round//
-var counter = 0;
-
-//cScore (computer's score) will be appended to dCScore, which will display the score after each round.//
-const dCScore = document.querySelector('#displayCompScore');
-const cScore = document.createElement('p');
-
-
-//hScore (human's score) will be appended to dHScore, which will display the score after each round.//
-const dHScore = document.querySelector('#displayHumanScore');
-const hScore = document.createElement('p');
-
-
-//These counters will keep counts of scores for each round.//
-var cScoreCounter = 0;
-var hScoreCounter = 0;
-
-//When playStart is clicked, the game will start.//
-playStart.addEventListener('click', () => {
+function startPlay () {
+    if (computerWin) {
+    cScoreCounter += 1;
+    cScore.textContent = (`Computer's Score: ${cScoreCounter}`);
+    dCScore.appendChild(cScore);
     
-        if (computerWin) {
-            cScoreCounter += 1;
-            cScore.textContent = cScoreCounter;
-            dCScore.appendChild(cScore);
-            hScoreCounter += 0;
-            hScore.textContent = hScoreCounter;
-            dHScore.appendChild(hScore);
-        } else if (humanWin) {
-            hScoreCounter += 1;
-            hScore.textContent = hScoreCounter;
-            dHScore.appendChild(hScore);
-            cScoreCounter += 0;
-            cScore.textContent = cScoreCounter;
-            dCScore.appendChild(cScore);
-        } else {
-            cScoreCounter += 0;
-            cScore.textContent = cScoreCounter;
-            dCScore.appendChild(cScore);
-            hScoreCounter += 0;
-            hScore.textContent = hScoreCounter;
-            dHScore.appendChild(hScore);
-        }
-    
-    counter += 1;
-
-    if (counter == 5) {
-        const announcement = document.querySelector('#announcement');
-        const finalAnn = document.createElement('p');
-        finalAnn.textContent = 'The game is over';
-        announcement.appendChild(finalAnn);
+    } else if (humanWin) {
+        hScoreCounter += 1;
+        hScore.textContent = `Your Score: ${hScoreCounter}`;
+        dHScore.appendChild(hScore);
+        
+    } else {
+        cScoreCounter += 0;
+        cScore.textContent = (`Computer's Score: ${cScoreCounter}`);
+        dCScore.appendChild(cScore);
+        hScoreCounter += 0;
+        hScore.textContent = `Your Score: ${hScoreCounter}`;
+        dHScore.appendChild(hScore);
     }
-}); 
 
+
+    if (cScoreCounter == 5) {
+    announce.innerHTML += `<br /> Computer wins! <br /> Computer's score is ${cScoreCounter} and Your score is ${hScoreCounter}`;
+    announcement.appendChild(announce);
+    } else if (hScoreCounter == 5) {
+    announce.innerHTML += `<br /> You win! <br /> Computer's score is ${cScoreCounter} and Your score is ${hScoreCounter}`;
+    announcement.appendChild(announce);
+    }
+}
 
 function playRound(humanClick) {
     
@@ -80,77 +87,58 @@ function playRound(humanClick) {
     
     if (human == 'rock') {
         if (computer == 'paper') {
-            console.log(alert("You lose! Paper beats rock."));
+            announce.innerHTML = "Your Choice: Rock  <br /> Computer's Choice: Paper";
+            announcement.appendChild(announce);
             computerWin = true;
             humanWin = false;            
         } else if (computer == 'scissors') {
-            console.log(alert ("You win! Rock beats scissors."));
+            announce.innerHTML = "Your Choice: Rock <br /> Computer's Choice: Scissors";
+            announcement.appendChild(announce);
             humanWin = true;
             computerWin = false;
         } else if (computer == 'rock') {
-            console.log(alert("It's a tie!"));
+            announce.innerHTML = "Your Choice: Rock <br /> Computer's Choice: Rock";
+            announcement.appendChild(announce);
             computerWin = false;
             humanWin = false;
         } 
   
     } else if (human == 'paper') {
         if (computer == 'rock') {
-            console.log(alert("You win! Paper beats rock."));
+            announce.innerHTML = "Your Choice: Paper  <br /> Computer's Choice: Rock";
+            announcement.appendChild(announce);
             humanWin = true;
             computerWin = false;
         } else if (computer == 'paper') {
-            console.log(alert("It's a tie!"));
+            announce.innerHTML = "Your Choice: Paper  <br /> Computer's Choice: Paper";
+            announcement.appendChild(announce);
             computerWin = false;
             humanWin = false;
         } else if (computer == 'scissors') {
-            console.log(alert ("You lose! Scissors beats paper."));
+            announce.innerHTML = "Your Choice: Paper  <br /> Computer's Choice: Scissors";
+            announcement.appendChild(announce);
             computerWin = true;
             humanWin = false;
         }
     } else if (human == 'scissors') {
         if (computer == 'rock') {
-            console.log(alert("You lose! Rock beats scissors."));
+            announce.innerHTML = "Your Choice: Scissors  <br /> Computer's Choice: Scissors";
+            announcement.appendChild(announce);
             computerWin = true;
             humanWin = false;
         } else if (computer == 'paper') {
-            console.log(alert("You win! Scissors beats paper."));
+            announce.innerHTML = "Your Choice: Scissors  <br /> Computer's Choice: Paper";
+            announcement.appendChild(announce);
             humanWin = true;
             computerWin = false;
         } else if (computer == 'scissors') {
-            console.log(alert("It's a tie!"));
+            announce.innerHTML = "Your Choice: Scissors  <br /> Computer's Choice: Scissors";
+            announcement.appendChild(announce);
             computerWin = false;
             humanWin = false;
         }
     }
 }
   
-const rBtn = document.querySelector('#rockBtn');
-const pBtn = document.querySelector('#paperBtn');
-const sBtn = document.querySelector('#scissorsBtn');
-
-rBtn.addEventListener('click', () => playRound('rock'));
-pBtn.addEventListener('click',  () => playRound('paper'));
-sBtn.addEventListener('click',  () => playRound('scissors'));
 
 
-
-
-  /*When playStart is clicked, 
-  It will play 5 games (let statement)
-  - if the btn is rBtn, playRound with 'rock';
-  - if pBtn, with 'paper';
-  - if sBtn, with 'scissors';
-  Update the score board after each round
-
-
-
- /*
-  function playGame() {
-    for (let i = 0; i < 5; i++) {
-    console.log(playRound());
-    }
-    console.log(alert(`Computer score is ${computerScore} and your score is ${humanScore}.`));
-  }
-  
-  console.log(playGame());
-  */
